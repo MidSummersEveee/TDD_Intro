@@ -1,7 +1,7 @@
 from selenium import webdriver
 import unittest
 
-calss NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(unittest.TestCase):
 
 	def setUp(self):
 		self.browser = webdriver.Firefox()
@@ -19,5 +19,5 @@ calss NewVisitorTest(unittest.TestCase):
 		# She is invited to enter a to-do items straight away
 
 
-if__name__ == '__main__':
+if __name__ == '__main__':
 	unittest.main(warnings='ignore')
