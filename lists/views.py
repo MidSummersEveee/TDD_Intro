@@ -8,7 +8,13 @@ def home_page(request):
 	# Now we don't have to generate response ourself.
 	# Render method woud automatically search inside current app's templates folder
 	# and build a response for you (based on the content of the template)
-	return render(request, 'home.html')
+	# return render(request, 'home.html')
 
 	# !!! the above render won't success if you app is not registered yet
 	# MAKE SURE check variable INSTALLED_APPS in core/settings.py
+
+	# render arguments version
+	# request.POST is a dictionary like object supporting multi-valued key as well
+	return render(request, 'home.html', {
+			'new_item_text': request.POST.get('item_text', '')
+		})
