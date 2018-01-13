@@ -13,7 +13,6 @@ def home_page(request):
 	# else:
 	# 	new_item_text = ''
 
-
 	# we don't need the arguments version at the bottom because
 	# the POST-REDIRECT-GET process is automatically done by browser
 		return redirect('/')
@@ -24,11 +23,14 @@ def home_page(request):
 	# item.save()
 
 
+	items = Item.objects.all()
+	return render(request, 'home.html', {'items': items})
+
 	# return HttpResponse('<html><title>To-Do Lists</title></html>')
 	# Now we don't have to generate response ourself.
 	# Render method woud automatically search inside current app's templates folder
 	# and build a response for you (based on the content of the template)
-	return render(request, 'home.html')
+	# return render(request, 'home.html')
 
 	# !!! the above render won't success if you app is not registered yet
 	# MAKE SURE check variable INSTALLED_APPS in core/settings.py
