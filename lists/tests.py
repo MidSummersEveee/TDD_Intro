@@ -27,10 +27,28 @@ class HomePageTest(TestCase):
 		response = self.client.get('/')
 		self.assertTemplateUsed(response, 'home.html')
 
+
+	# def test_try(self):
+	# 	response = self.client.post('/', data={'item_text': ''})
+	# 	self.assertEqual(Item.objects.count(), 0)
+
+
 	def test_can_save_a_POST_request(self):
 		response = self.client.post('/', data={'item_text': 'A new list item'})
-		self.assertEqual(response.status_code, 200)
-		self.assertIn('A new list item', response.content.decode())
+		
+		# check orm correction
+		self.assertEqual(Item.objects.count(), 1)
+		new_item = Item.objects.first()
+		self.assertIn(new_item.text, 'A new list item')
+
+		# check for response correction
+		self.assertEqual(response.status_code, 302)
+		self.assertEqual(response['location'], '/')
+
+
+	def test_only_save_items_when_necessary(self):
+		self.client.get('/')
+		self.assertEqual(Item.objects.count(), 0)
 
 
 class ItemModelTest(TestCase):
