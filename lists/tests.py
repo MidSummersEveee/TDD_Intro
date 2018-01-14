@@ -1,5 +1,10 @@
 from django.template.loader import render_to_string
-from django.urls import resolve
+
+# for django 1.10 & 2.0
+# from django.urls import resolve
+# for django 1.8+
+from django.core.urlresolvers import resolve
+
 from django.test import TestCase
 from lists.models import Item
 from django.http import HttpRequest
@@ -44,8 +49,8 @@ class HomePageTest(TestCase):
 		# check for PRG
 		response = self.client.post('/', data={'item_text': 'A new list item'})
 		self.assertEqual(response.status_code, 302)
-		self.assertEqual(response['location'], '/')
-
+		# self.assertEqual(response['location'], '/')
+		self.assertEqual(response['location'], 'http://testserver/')
 
 	def test_only_save_items_when_necessary(self):
 		self.client.get('/')
