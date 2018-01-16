@@ -6,15 +6,15 @@ from lists.models import Item
 def home_page(request):
 	
 
-	if request.method == 'POST':
+	# if request.method == 'POST':
 		# shortcut, no need to call save()
-		Item.objects.create(text=request.POST.get('item_text', ''))
+		# Item.objects.create(text=request.POST.get('item_text', ''))
 	# else:
 	# 	new_item_text = ''
 
 	# we don't need the arguments version at the bottom because
 	# the POST-REDIRECT-GET process is automatically done by browser
-		return redirect('/lists/the-only-list-in-the-world/')
+		# return redirect('/lists/the-only-list-in-the-world/')
 
 	# ORM operations
 	# item = Item()
@@ -43,3 +43,9 @@ def home_page(request):
 def view_list(request):
 	items = Item.objects.all()
 	return render(request, 'list.html', {'items': items})
+
+def new_list(request):
+	if request.method == 'POST':
+		# shortcut, no need to call save()
+		Item.objects.create(text=request.POST.get('item_text', ''))
+		return redirect('/lists/the-only-list-in-the-world/')
