@@ -74,16 +74,20 @@ class NewVisitorTest(LiveServerTestCase):
 		edith_list_url = self.browser.current_url
 		self.assertRegex(edith_list_url, '/lists/.+')
 
+		# We use a new session to make sure no info of Edith's 
+		# is coming through from cookies
+		self.browser.quit()
+		self.browser = webdriver.Firefox()
+
 		# Now a new user, Francis, comes along to the site
 		# Francis visits the homepage. There is no sign of Edith's list
-		self.browser.quit()
 		self.browser.get(self.live_server_url)
-		page.text = self.find_element_by_tag_name('body')
+		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Buy peacock feathers', page_text)
 		self.assertNotIn('make a fly', page_text)
 
 		# Francis starts a new list by entering a new item.
-		inputbox = self.find_element_by_id(id_new_item)
+		inputbox = self.browser.find_element_by_id('id_new_item')
 		inputbox.send_keys('Buy milk')
 		inputbox.send_keys(Keys.ENTER)
 		self.wait_for_row_in_list_table('1: Buy milk')
