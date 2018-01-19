@@ -1,3 +1,4 @@
+import os
 import time
 # from django.test import LiveServerTestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -10,6 +11,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
 	def setUp(self):
 		self.browser = webdriver.Firefox()
+		# staging modification begins here
+		staging_server = os.environ.get('STAGING_SERVER')
+		if staging_server:
+			self.live_server_url = 'http://' + staging_server
 
 	def tearDown(self):
 		self.browser.refresh()
@@ -105,7 +110,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 		self.assertIn('Buy milk', page_text)
 
 		# Satisfied, they both go to sleep
-		self.fail('Finish the test!')
+		# self.fail('Finish the test!')
 
 	def test_layout_and_styling(self):
 		# Edith goes to the home page
