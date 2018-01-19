@@ -1,1 +1,2 @@
 django==1.8.13
+selenium==3.8.1
