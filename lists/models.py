@@ -5,5 +5,7 @@ class List(models.Model):
 	
 class Item(models.Model):
 	text = models.TextField(default='')
-	list = models.ForeignKey(List, default=None)
-
+	# 1.9 or below
+	# list = models.ForeignKey(List, default=None)
+	# 2.0 +
+	list = models.ForeignKey(List, on_delete=models.PROTECT, default=None)
