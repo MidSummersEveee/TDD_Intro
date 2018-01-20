@@ -1,9 +1,9 @@
 from django.template.loader import render_to_string
 
 # for django 1.10 & 2.0
-# from django.urls import resolve
+from django.urls import resolve
 # for django 1.8+
-from django.core.urlresolvers import resolve
+# from django.core.urlresolvers import resolve
 
 from django.test import TestCase
 from lists.models import Item, List

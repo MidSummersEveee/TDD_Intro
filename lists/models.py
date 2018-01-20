@@ -8,4 +8,5 @@ class Item(models.Model):
 	# 1.9 or below
 	# list = models.ForeignKey(List, default=None)
 	# 2.0 +
-	list = models.ForeignKey(List, on_delete=models.PROTECT, default=None)
+	list = models.ForeignKey(List, on_delete=models.CASCADE)
+	# list = models.ForeignKey(List, on_delete=models.PROTECT, default=None)
